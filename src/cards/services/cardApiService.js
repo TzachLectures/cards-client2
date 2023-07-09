@@ -1,5 +1,6 @@
 import axios from "axios";
 const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8181";
+console.log(apiUrl);
 export const getCards = async () => {
   try {
     const response = await axios.get(`${apiUrl}/cards`);
