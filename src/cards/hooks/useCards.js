@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import useAxios from "../../hooks/useAxios";
 import { useSnack } from "../../providers/SnackbarProvider";
 import { useUser } from "../../users/providers/UserProvider";
@@ -11,16 +11,33 @@ import {
   getCards,
   getMyCards,
 } from "../services/cardApiService";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import ROUTES from "../../routes/routesModel";
 
 export default function useCards() {
   const [cards, setCards] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [card, setCard] = useState(null);
+  const [filterCards, setFilterCards] = useState(null);
+  const [query, setQuery] = useState("");
+  const [searchParams] = useSearchParams();
   useAxios();
   const snack = useSnack();
   const { user } = useUser();
-
+  const navigate = useNavigate();
+  useEffect(() => {
+    setQuery(searchParams.get("q") ?? "");
+  }, [searchParams]);
+  useEffect(() => {
+    if (cards)
+      setFilterCards(
+        cards.filter(
+          (card) =>
+            card.title.includes(query) || String(card.bizNumber).includes(query)
+        )
+      );
+  }, [cards, query]);
   const requestStatus = (loading, errorMessage, cards, card = null) => {
     setLoading(loading);
     setError(errorMessage);
@@ -80,6 +97,9 @@ export default function useCards() {
         const card = await editCard(cardId, cardFromClient);
         requestStatus(false, null, null, card);
         snack("success", "The business card has been successfully updated");
+        setTimeout(() => {
+          navigate(ROUTES.ROOT);
+        }, 1000);
       } catch (error) {
         requestStatus(false, error, null);
       }
@@ -119,6 +139,9 @@ export default function useCards() {
         const card = await createCard(cardFromClient);
         requestStatus(false, null, null, card);
         snack("success", "A new business card has been created");
+        setTimeout(() => {
+          navigate(ROUTES.ROOT);
+        }, 1000);
       } catch (error) {
         requestStatus(false, error, null);
       }
@@ -127,8 +150,8 @@ export default function useCards() {
   );
 
   const value = useMemo(() => {
-    return { isLoading, cards, card, error };
-  }, [isLoading, cards, card, error]);
+    return { isLoading, cards, card, error, filterCards };
+  }, [isLoading, cards, card, error, filterCards]);
 
   return {
     value,

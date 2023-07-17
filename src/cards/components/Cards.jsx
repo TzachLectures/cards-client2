@@ -4,13 +4,11 @@ import React from "react";
 import cardType from "../models/types/cardType";
 import CardBussinesComponent from "./card/CardBussinesComponent";
 
-export default function Cards({ cards, handleDelete }) {
+export default function Cards({ cards, handleDelete, handleLike }) {
   const handleEdit = (id) => {
     console.log(`Card ${id} is Edited`);
   };
-  const handleLike = (id) => {
-    console.log(`Card ${id} is Liked`);
-  };
+
   return (
     <>
       <Grid container spacing={2}>

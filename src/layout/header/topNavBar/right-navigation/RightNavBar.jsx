@@ -7,6 +7,7 @@ import { useUser } from "../../../../users/providers/UserProvider";
 import Logged from "./Logged";
 import MoreButton from "./MoreButton";
 import NotLogged from "./NotLogged";
+import SearchBar from "./SearchBar";
 
 export default function RightNavBar() {
   const { isDark, toggleDarkMode } = useTheme();
@@ -19,6 +20,7 @@ export default function RightNavBar() {
           alignItems: "center",
         }}
       >
+        <SearchBar />
         <IconButton sx={{ ml: 1 }} onClick={toggleDarkMode}>
           {isDark ? <LightModeIcon /> : <DarkModeIcon />}
         </IconButton>

@@ -37,6 +37,7 @@ export default function CardBussinesComponent({
           handleDelete={handleDelete}
           handleEdit={handleEdit}
           handleLike={handleLike}
+          likes={card.likes}
         />
       </Card>
     </>

@@ -15,13 +15,19 @@ export default function CardActionBar({
   handleLike,
   id,
   user_id,
+  likes,
 }) {
   const { user } = useUser();
   const [isDialogOpen, setDialog] = useState(false);
+  const [isLiked, setIsLiked] = useState(() => likes.includes(user._id));
   const navigate = useNavigate();
   const handleDeleteCard = () => {
     handleDelete(id);
     setDialog(false);
+  };
+  const handleLikeCard = async () => {
+    await handleLike(id);
+    setIsLiked((prev) => !prev);
   };
 
   return (
@@ -51,11 +57,8 @@ export default function CardActionBar({
             <CallIcon />
           </IconButton>
           {user && (
-            <IconButton
-              aria-label="Add to favorite"
-              onClick={() => handleLike(id)}
-            >
-              <FavoriteIcon />
+            <IconButton aria-label="Add to favorite" onClick={handleLikeCard}>
+              <FavoriteIcon color={isLiked ? "error" : "inherit"} />
             </IconButton>
           )}
         </Box>

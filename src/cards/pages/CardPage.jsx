@@ -4,10 +4,12 @@ import PageHeader from "../../components/PageHeader";
 
 import useCards from "../hooks/useCards";
 import CardsFeedback from "../components/CardsFeedback";
+import AddNewCardButton from "../components/card/AddNewCardButton";
 
 export default function CardPage() {
-  const { value, handleGetCards, handleDeleteCard } = useCards();
-  const { cards, error, isLoading } = value;
+  const { value, handleGetCards, handleDeleteCard, handleLikeCard } =
+    useCards();
+  const { filterCards, error, isLoading } = value;
 
   useEffect(() => {
     handleGetCards();
@@ -27,9 +29,11 @@ export default function CardPage() {
         <CardsFeedback
           isLoading={isLoading}
           error={error}
-          cards={cards}
+          cards={filterCards}
           handleDelete={handleDelete}
+          handleLike={handleLikeCard}
         />
+        <AddNewCardButton />
       </Container>
     </div>
   );

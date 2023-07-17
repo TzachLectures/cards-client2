@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from "react";
 import useAxios from "../../hooks/useAxios";
-import { login, signup } from "../services/usersApiService";
+import { getUserData, login, signup } from "../services/usersApiService";
 import {
   getUser,
   removeToken,
@@ -66,6 +66,18 @@ const useUsers = () => {
     [requestStatus, handleLogin]
   );
 
+  const handleGetUser = useCallback(async (id) => {
+    try {
+      const userData = await getUserData(id);
+      setLoading(false);
+      setError(null);
+      return userData;
+    } catch (error) {
+      setLoading(false);
+      setError(error);
+    }
+  }, []);
+
   const value = useMemo(
     () => ({ isLoading, error, user }),
     [isLoading, error, user]
@@ -76,6 +88,7 @@ const useUsers = () => {
     handleLogin,
     handleLogout,
     handleSignup,
+    handleGetUser,
   };
 };
 

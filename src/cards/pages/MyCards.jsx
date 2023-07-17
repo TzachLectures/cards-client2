@@ -6,10 +6,12 @@ import ROUTES from "../../routes/routesModel";
 import { useUser } from "../../users/providers/UserProvider";
 import CardsFeedback from "../components/CardsFeedback";
 import useCards from "../hooks/useCards";
+import AddNewCardButton from "../components/card/AddNewCardButton";
 
 export default function MyCards() {
-  const { value, handleGetMyCards, handleDeleteCard } = useCards();
-  const { cards, error, isLoading } = value;
+  const { value, handleGetMyCards, handleDeleteCard, handleLikeCard } =
+    useCards();
+  const { filterCards, error, isLoading } = value;
 
   const { user } = useUser();
   const navigate = useNavigate();
@@ -37,9 +39,11 @@ export default function MyCards() {
         <CardsFeedback
           isLoading={isLoading}
           error={error}
-          cards={cards}
+          cards={filterCards}
           handleDelete={handleDelete}
+          handleLike={handleLikeCard}
         />
+        <AddNewCardButton />
       </Container>
     </div>
   );
