@@ -13,6 +13,7 @@ import {
 } from "../services/cardApiService";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
+import normalizeCard from "../helpers/normalization/normalizeCard";
 
 export default function useCards() {
   const [cards, setCards] = useState([]);
@@ -136,6 +137,9 @@ export default function useCards() {
     async (cardFromClient) => {
       try {
         setLoading(true);
+        console.log(JSON.stringify(cardFromClient));
+        console.log(cardFromClient);
+
         const card = await createCard(cardFromClient);
         requestStatus(false, null, null, card);
         snack("success", "A new business card has been created");

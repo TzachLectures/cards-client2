@@ -15,6 +15,7 @@ export default function CardBussinesComponent({
   handleEdit,
   handleLike,
 }) {
+  console.log(card);
   const navigate = useNavigate();
   return (
     <>

@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8181";
+const apiUrl = process.env.REACT_APP_API_URL || "https://localhost:7222/api";
 console.log(apiUrl);
 export const getCards = async () => {
   try {
@@ -42,7 +42,7 @@ export const getCard = async (cardId) => {
 
 export const createCard = async (card) => {
   try {
-    const { data } = await axios.post(`${apiUrl}/cards/`, card);
+    const { data } = await axios.post(`${apiUrl}/cards`, card);
     return data;
   } catch (error) {
     return Promise.reject(error.message);
