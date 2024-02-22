@@ -19,7 +19,7 @@ export default function CardActionBar({
 }) {
   const { user } = useUser();
   const [isDialogOpen, setDialog] = useState(false);
-  const [isLiked, setIsLiked] = useState(() => likes.includes(user._id));
+  const [isLiked, setIsLiked] = useState(() => likes.includes(user.?_id));
   const navigate = useNavigate();
   const handleDeleteCard = () => {
     handleDelete(id);
