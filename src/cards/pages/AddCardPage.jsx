@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
-import React, { useEffect } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import React from "react";
+import { Navigate } from "react-router-dom";
 import useForm from "../../forms/hooks/useForm";
 import ROUTES from "../../routes/routesModel";
 import { useUser } from "../../users/providers/UserProvider";
