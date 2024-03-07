@@ -13,7 +13,6 @@ import {
 } from "../services/cardApiService";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
-import normalizeCard from "../helpers/normalization/normalizeCard";
 
 export default function useCards() {
   const [cards, setCards] = useState([]);
