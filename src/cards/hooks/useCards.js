@@ -104,7 +104,7 @@ export default function useCards() {
         requestStatus(false, error, null);
       }
     },
-    [snack]
+    [snack, navigate]
   );
 
   //handleLikeCard
@@ -149,7 +149,7 @@ export default function useCards() {
         requestStatus(false, error, null);
       }
     },
-    [snack]
+    [snack, navigate]
   );
 
   const value = useMemo(() => {

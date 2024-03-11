@@ -18,7 +18,7 @@ export default function Profile() {
       };
       getUser();
     }
-  }, [user]);
+  }, [user, handleGetUser]);
 
   if (!user) return <Navigate replace to={ROUTES.CARDS} />;
 
