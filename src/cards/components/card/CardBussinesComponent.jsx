@@ -15,7 +15,6 @@ export default function CardBussinesComponent({
   handleEdit,
   handleLike,
 }) {
-  console.log(card);
   const navigate = useNavigate();
   return (
     <>
@@ -39,6 +38,7 @@ export default function CardBussinesComponent({
           handleEdit={handleEdit}
           handleLike={handleLike}
           likes={card.likes}
+          phone={card.phone}
         />
       </Card>
     </>
