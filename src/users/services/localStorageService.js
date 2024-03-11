@@ -11,7 +11,7 @@ export const getUser = () => {
     userDetails.isBusiness = userDetails.isBusiness === "true";
     userDetails.isAdmin = userDetails.isAdmin === "true";
 
-    return userDetails;
+    return JwtDecode(user);
   } catch (error) {
     return null;
   }
