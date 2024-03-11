@@ -7,7 +7,11 @@ export const setTokenInLocalStorage = (encryptedToken) =>
 export const getUser = () => {
   try {
     const user = localStorage.getItem(TOKEN);
-    return JwtDecode(user);
+    const userDetails = JwtDecode(user);
+    userDetails.isBusiness = userDetails.isBusiness === "true";
+    userDetails.isAdmin = userDetails.isAdmin === "true";
+
+    return userDetails;
   } catch (error) {
     return null;
   }

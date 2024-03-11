@@ -9,6 +9,7 @@ import LogoIcon from "../logo/LogoIcon";
 export default function LeftNavBar() {
   const { user } = useUser();
   console.log(user);
+
   return (
     <Box>
       <LogoIcon />
